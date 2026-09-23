@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>彭于晏 · 个人作品集</title>
+<meta name="description" content="彭于晏的个人作品集——软件工程在读，关注 AI 辅助开发与大语言模型应用，收录微信小程序、全栈 Web、数据可视化与 AI 应用项目。" />
+<meta name="theme-color" content="#faf9f6" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/layout.css" />
+<link rel="stylesheet" href="css/components.css" />
+<link rel="stylesheet" href="css/projects.css" />
+</head>
+
+<body>
+<a class="skip-link" href="#works">跳到项目作品</a>
+
+<!-- 顶部导航 ------------------------------------------------------------- -->
+<header class="nav" id="nav">
+  <div class="nav-wrap">
+    <a class="brand" href="#intro">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span>彭于晏</span>
+      <span class="brand-sub">Portfolio</span>
+    </a>
+
+    <nav class="nav-links" id="nav-links" aria-label="站内导航">
+      <a href="#intro"><span class="nav-index">01</span>个人介绍</a>
+      <a href="#works"><span class="nav-index">02</span>项目作品</a>
+      <a href="#about"><span class="nav-index">03</span>关于我</a>
+      <a href="#skills"><span class="nav-index">04</span>技能方向</a>
+      <a href="#contact"><span class="nav-index">05</span>联系方式</a>
+    </nav>
+
+    <button class="nav-toggle" id="nav-toggle" type="button"
+            aria-expanded="false" aria-controls="nav-links" aria-label="打开菜单">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <!-- 首屏 · 个人介绍 ----------------------------------------------------- -->
+  <section class="hero" id="intro">
+    <div class="wrap hero-wrap">
+      <div class="hero-main">
+        <p class="hero-eyebrow">Portfolio · 2026</p>
+        <h1 class="hero-name">彭于晏</h1>
+        <p class="hero-role">软件工程 · 在读</p>
+        <p class="hero-desc" id="hero-desc"></p>
+        <ul class="tag-list hero-skills" id="hero-skills"></ul>
+      </div>
+
+      <aside class="hero-side">
+        <figure class="hero-portrait">
+          <div class="hero-portrait-frame">
+            <img class="hero-portrait-img" id="hero-portrait-img"
+                 src="assets/images/profile/portrait.png"
+                 alt="彭于晏的个人照片" width="243" height="432"
+                 decoding="async" />
+          </div>
+          <figcaption class="hero-portrait-cap" id="hero-portrait-cap"></figcaption>
+        </figure>
+
+        <div class="hero-side-row">
+          <dl class="hero-facts" id="hero-facts"></dl>
+          <p class="hero-vertical" id="hero-vertical" aria-hidden="true">Selected Works</p>
+        </div>
+      </aside>
+    </div>
+
+    <div class="wrap hero-foot">
+      <span>向下滚动查看作品 · Scroll</span>
+    </div>
+  </section>
+
+  <!-- 项目作品 ------------------------------------------------------------ -->
+  <section class="section" id="works">
+    <div class="wrap">
+      <header class="sec-head">
+        <span class="sec-index" aria-hidden="true">01</span>
+        <div>
+          <p class="eyebrow">Selected Works</p>
+          <h2 class="sec-title">项目作品</h2>
+          <p class="sec-lead">
+            四个从真实需求出发的项目，覆盖微信小程序、全栈 Web 平台、数据可视化大屏与大模型应用。
+            每件作品都附有技术栈与完成时间，方便快速了解我做过什么。
+          </p>
+        </div>
+      </header>
+
+      <div class="works-list" id="works-list">
+        <noscript>
+          <p class="sec-lead">项目列表需要启用 JavaScript 才能显示。</p>
+        </noscript>
+      </div>
+    </div>
+  </section>
+
+  <!-- 关于我 -------------------------------------------------------------- -->
+  <section class="section" id="about">
+    <div class="wrap">
+      <header class="sec-head">
+        <span class="sec-index" aria-hidden="true">02</span>
+        <div>
+          <p class="eyebrow">About</p>
+          <h2 class="sec-title">关于我</h2>
+        </div>
+      </header>
+
+      <div class="about-grid">
+        <div class="about-text" id="about-text"></div>
+
+        <aside>
+          <p class="eyebrow">Basic Info</p>
+          <dl class="about-facts" id="about-facts"></dl>
+        </aside>
+      </div>
+
+      <div class="about-timeline">
+        <p class="eyebrow">轨迹速览</p>
+        <ol class="timeline" id="about-timeline"></ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 技能方向 ------------------------------------------------------------ -->
+  <section class="section" id="skills">
+    <div class="wrap">
+      <header class="sec-head">
+        <span class="sec-index" aria-hidden="true">03</span>
+        <div>
+          <p class="eyebrow">Skills</p>
+          <h2 class="sec-title">技能方向</h2>
+          <p class="sec-lead">
+            从语言基础到工程落地，再到大模型应用的接入与调优，下面是我目前正在使用和持续深入的技术方向。
+          </p>
+        </div>
+      </header>
+
+      <div class="skill-groups" id="skill-groups"></div>
+    </div>
+  </section>
+
+  <!-- 联系方式 ------------------------------------------------------------ -->
+  <section class="section" id="contact">
+    <div class="wrap">
+      <header class="sec-head">
+        <span class="sec-index" aria-hidden="true">04</span>
+        <div>
+          <p class="eyebrow">Contact</p>
+          <h2 class="sec-title">联系方式</h2>
+        </div>
+      </header>
+
+      <div class="contact-grid">
+        <div>
+          <a class="contact-mail" href="mailto:xiaohe@example.com">xiaohe@example.com</a>
+          <p class="contact-note">
+            如果你对我的项目感兴趣，或者有实习、课程合作与项目交流的机会，
+            欢迎通过邮件或微信联系我，我会尽快回复。
+          </p>
+        </div>
+        <ul class="contact-list" id="contact-list"></ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-wrap">
+    <span>© <span id="year">2026</span> 彭于晏 · 个人作品集</span>
+    <span>原生 HTML / CSS / JavaScript 构建</span>
+  </div>
+</footer>
+
+<button class="to-top" id="to-top" type="button" aria-label="回到顶部">
+  <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+    <path d="M7 12V2M2.5 6.5L7 2l4.5 4.5" fill="none" stroke="currentColor"
+          stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+</button>
+
+<script src="js/data.js"></script>
+<script src="js/render.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

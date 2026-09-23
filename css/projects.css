@@ -1,0 +1,307 @@
+/* ==========================================================================
+   projects.css — 项目作品区的四种杂志式版式
+   ---------------------------------------------------------------------------
+   版式由数据里的 layout 字段决定，渲染时映射成 work--<layout> 类：
+     wide         全幅大图 + 下方双栏文字（封面式，用于重点项目）
+     image-left   图 7 : 文 4（左图右文）
+     image-right  文 4 : 图 7（右图左文，镜像）
+     text         文 8 : 图 3（文字主导 + 窄幅竖图）
+   新增项目只需在 js/data.js 里追加对象，这里会自动套用对应版式。
+   ========================================================================== */
+
+.works-list {
+  border-bottom: 1px solid var(--line);
+}
+
+.work {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(16px, 2.4vw, 36px);
+  row-gap: clamp(18px, 2.6vw, 34px);
+  padding-block: clamp(44px, 6.5vw, 96px);
+  border-top: 1px solid var(--line);
+}
+
+/* 图片 -------------------------------------------------------------------- */
+
+.work-figure {
+  margin: 0;
+  grid-row: 1;
+  overflow: hidden;
+  background: var(--paper-2);
+}
+
+.work-figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.9s var(--ease);
+}
+
+.work:hover .work-figure img {
+  transform: scale(1.025);
+}
+
+/* 文字块 ------------------------------------------------------------------ */
+
+.work-body {
+  grid-row: 1;
+  min-width: 0;
+}
+
+.work-text {
+  min-width: 0;
+}
+
+.work-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: clamp(12px, 1.6vw, 20px);
+}
+
+.work-index {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  letter-spacing: 0;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.work-meta .sep {
+  width: 5px;
+  height: 5px;
+  border: 1px solid var(--line-2);
+  transform: rotate(45deg);
+  flex: none;
+}
+
+/* 类别标签（Tag）——紧贴项目名上方。
+   与底部技术栈标签用同一套胶囊形制，只靠点缀色区分层级：
+   类别读作"这是什么类型的作品"，技术栈读作"用了什么"。 */
+.work-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: clamp(10px, 1.5vw, 15px);
+}
+
+.work-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid rgba(194, 69, 45, 0.32);
+  border-radius: 999px;
+  padding: 4px 11px;
+  white-space: nowrap;
+}
+
+.work-title {
+  font-size: clamp(1.65rem, 3.6vw, 2.6rem);
+  margin-bottom: 0.32em;
+}
+
+.work-sub {
+  font-size: clamp(0.88rem, 1.15vw, 1rem);
+  color: var(--ink-3);
+  line-height: 1.6;
+  margin-bottom: clamp(14px, 2vw, 24px);
+}
+
+.work-desc {
+  color: var(--ink-2);
+  font-size: clamp(0.92rem, 1.1vw, 1rem);
+  line-height: 1.95;
+}
+
+.work-stack {
+  margin-top: clamp(16px, 2.2vw, 26px);
+}
+
+/* 可选数据指标（只有带 metric 字段的项目才会出现） */
+.work-metric {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: clamp(18px, 2.4vw, 28px);
+  padding-top: clamp(14px, 1.8vw, 20px);
+  border-top: 1px solid var(--line);
+}
+
+.work-metric b {
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.work-metric span {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* ==========================================================================
+   版式 1 · 全幅大图（封面式）
+   ========================================================================== */
+
+.work--wide .work-figure {
+  grid-column: 1 / -1;
+  aspect-ratio: 21 / 9;
+  /* 通栏出血：图片顶到视口两侧，文字仍留在版心内，形成刻意的错位 */
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+}
+
+.work--wide .work-body {
+  grid-row: 2;
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  column-gap: clamp(20px, 4.5vw, 84px);
+  align-items: start;
+}
+
+.work--wide .work-head {
+  padding-left: clamp(0px, 1.5vw, 22px);
+  border-left: 2px solid var(--accent);
+  padding-right: 4px;
+}
+
+/* ==========================================================================
+   版式 2 · 左图右文
+   ========================================================================== */
+
+.work--image-left .work-figure {
+  grid-column: 1 / span 7;
+  aspect-ratio: 4 / 3;
+}
+
+.work--image-left .work-body {
+  grid-column: 9 / span 4;
+  align-self: center;
+}
+
+/* ==========================================================================
+   版式 3 · 右图左文（镜像）
+   ========================================================================== */
+
+.work--image-right .work-figure {
+  grid-column: 6 / span 7;
+  aspect-ratio: 5 / 4;
+}
+
+.work--image-right .work-body {
+  grid-column: 1 / span 4;
+  align-self: center;
+}
+
+/* 镜像版式在文字上方加一条短色块，强化左右呼应 */
+.work--image-right .work-head::before {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 6px;
+  background: var(--accent-soft);
+  margin-bottom: clamp(12px, 1.6vw, 18px);
+}
+
+/* ==========================================================================
+   版式 4 · 文字主导 + 窄幅竖图
+   ========================================================================== */
+
+.work--text .work-body {
+  grid-column: 1 / span 8;
+}
+
+.work--text .work-figure {
+  grid-column: 10 / span 3;
+  aspect-ratio: 3 / 4;
+  align-self: start;
+}
+
+.work--text .work-title {
+  font-size: clamp(1.9rem, 4.6vw, 3.3rem);
+}
+
+.work--text .work-desc {
+  max-width: 52ch;
+}
+
+/* ==========================================================================
+   响应式：所有版式在窄屏统一降级为单栏（图在上、文在下）
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .work--wide .work-body {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: clamp(16px, 2.4vw, 24px);
+  }
+  .work--wide .work-head {
+    border-left: 0;
+    padding-left: 0;
+    border-top: 2px solid var(--accent);
+    padding-top: 18px;
+  }
+  .work--image-left .work-body,
+  .work--text .work-body {
+    grid-column: 1 / span 6;
+    align-self: center;
+  }
+  .work--image-right .work-body {
+    grid-column: 1 / span 6;
+    align-self: center;
+  }
+  .work--image-left .work-figure,
+  .work--image-right .work-figure {
+    grid-column: 7 / span 6;
+    aspect-ratio: 1 / 1;
+  }
+  .work--text .work-figure {
+    grid-column: 9 / span 4;
+    aspect-ratio: 3 / 4;
+  }
+}
+
+@media (max-width: 760px) {
+  .work {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .work-figure,
+  .work-body,
+  .work--wide .work-figure,
+  .work--wide .work-body,
+  .work--image-left .work-figure,
+  .work--image-left .work-body,
+  .work--image-right .work-figure,
+  .work--image-right .work-body,
+  .work--text .work-figure,
+  .work--text .work-body {
+    grid-column: 1 / -1;
+  }
+  .work-figure {
+    grid-row: 1;
+    aspect-ratio: 16 / 10;
+  }
+  .work-body {
+    grid-row: 2;
+  }
+  .work--text .work-figure {
+    aspect-ratio: 4 / 3;
+  }
+  .work:hover .work-figure img {
+    transform: none;
+  }
+}

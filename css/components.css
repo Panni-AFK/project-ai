@@ -1,0 +1,263 @@
+/* ==========================================================================
+   components.css — 导航、标签、按钮、分割线等可复用组件
+   ========================================================================== */
+
+/* 顶部导航 ---------------------------------------------------------------- */
+
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  background: rgba(250, 249, 246, 0.82);
+  backdrop-filter: saturate(180%) blur(14px);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
+}
+
+.nav.is-scrolled {
+  border-bottom-color: var(--line);
+  background: rgba(250, 249, 246, 0.94);
+}
+
+.nav-wrap {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font-family: var(--font-serif);
+  font-size: 1.06rem;
+  letter-spacing: 0.04em;
+}
+
+.brand-mark {
+  width: 11px;
+  height: 11px;
+  background: var(--accent);
+  flex: none;
+}
+
+.brand-sub {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding-left: 11px;
+  margin-left: 3px;
+  border-left: 1px solid var(--line-2);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: clamp(18px, 2.4vw, 34px);
+}
+
+.nav-links a {
+  position: relative;
+  font-size: 0.88rem;
+  color: var(--ink-2);
+  padding-block: 6px;
+  transition: color 0.25s var(--ease);
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s var(--ease);
+}
+
+.nav-links a:hover,
+.nav-links a.is-active {
+  color: var(--ink);
+}
+
+.nav-links a:hover::after,
+.nav-links a.is-active::after {
+  transform: scaleX(1);
+}
+
+.nav-links .nav-index {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--ink-3);
+  margin-right: 6px;
+}
+
+.nav-toggle {
+  display: none;
+  width: 40px;
+  height: 40px;
+  margin-right: -8px;
+  position: relative;
+}
+
+.nav-toggle span {
+  position: absolute;
+  left: 10px;
+  width: 20px;
+  height: 1.5px;
+  background: var(--ink);
+  transition: transform 0.3s var(--ease), opacity 0.2s var(--ease);
+}
+
+.nav-toggle span:nth-child(1) {
+  top: 16px;
+}
+.nav-toggle span:nth-child(2) {
+  top: 23px;
+}
+
+.nav.is-open .nav-toggle span:nth-child(1) {
+  transform: translateY(3.5px) rotate(45deg);
+}
+
+.nav.is-open .nav-toggle span:nth-child(2) {
+  transform: translateY(-3.5px) rotate(-45deg);
+}
+
+/* 标签 -------------------------------------------------------------------- */
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-2);
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  padding: 4px 11px;
+  white-space: nowrap;
+  transition: border-color 0.25s var(--ease), color 0.25s var(--ease);
+}
+
+.tag:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* 小按钮 ------------------------------------------------------------------ */
+
+.btn-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink);
+  padding: 11px 20px;
+  border: 1px solid var(--line-2);
+  transition: background 0.25s var(--ease), color 0.25s var(--ease),
+    border-color 0.25s var(--ease);
+}
+
+.btn-line:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* 返回顶部 ---------------------------------------------------------------- */
+
+.to-top {
+  position: fixed;
+  right: clamp(16px, 3vw, 32px);
+  bottom: clamp(16px, 3vw, 32px);
+  z-index: 90;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 50%;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease),
+    visibility 0.3s;
+}
+
+.to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.to-top:hover {
+  background: var(--accent);
+}
+
+/* 移动端导航 -------------------------------------------------------------- */
+
+@media (max-width: 860px) {
+  .nav-toggle {
+    display: block;
+  }
+
+  .brand-sub {
+    display: none;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    padding: 8px var(--gutter) 22px;
+    transform: translateY(-12px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.28s var(--ease), transform 0.28s var(--ease),
+      visibility 0.28s;
+  }
+
+  .nav.is-open .nav-links {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  .nav-links a {
+    padding: 15px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.98rem;
+  }
+
+  .nav-links a::after {
+    display: none;
+  }
+}

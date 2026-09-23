@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000"
+     role="img" aria-labelledby="ptitle pdesc">
+  <title id="ptitle">个人肖像占位插画</title>
+  <desc id="pdesc">米白色背景上的人物半身剪影插画，用于尚未提供真实照片时的占位。</desc>
+
+  <defs>
+    <linearGradient id="pbg" x1="0" y1="0" x2="0.15" y2="1">
+      <stop offset="0" stop-color="#f5f3ee" />
+      <stop offset="1" stop-color="#e6e2d8" />
+    </linearGradient>
+    <linearGradient id="ptorso" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2b2925" />
+      <stop offset="1" stop-color="#131211" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="1000" fill="url(#pbg)" />
+
+  <circle cx="400" cy="392" r="292" fill="#e3ded2" />
+  <circle cx="400" cy="392" r="292" fill="none" stroke="#d3ccbb" stroke-width="1" />
+
+  <path d="M400 520c-132 0-238 74-252 190l-16 290h536l-16-290c-14-116-120-190-252-190z" fill="url(#ptorso)" />
+  <rect x="352" y="470" width="96" height="130" fill="#1a1917" />
+  <ellipse cx="400" cy="404" rx="148" ry="176" fill="#1a1917" />
+  <path d="M348 592 452 592 400 704z" fill="#e4dfd3" />
+
+  <g fill="none" stroke="#1a1917" stroke-opacity="0.2" stroke-width="1.4">
+    <path d="M34 62V34h28" />
+    <path d="M738 34h28v28" />
+    <path d="M766 938v28h-28" />
+    <path d="M62 966H34v-28" />
+  </g>
+</svg>
