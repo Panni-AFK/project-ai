@@ -18,6 +18,11 @@
   /* 唯一点缀色：砖红 */
   --accent: #c2452d;
   --accent-soft: rgba(194, 69, 45, 0.1);
+  --accent-line: rgba(194, 69, 45, 0.32);
+
+  /* 导航毛玻璃底色（带透明度，随主题切换） */
+  --nav-bg: rgba(250, 249, 246, 0.82);
+  --nav-bg-scrolled: rgba(250, 249, 246, 0.94);
 
   /* 字体 */
   --font-serif: "Songti SC", "STSong", "Source Han Serif SC", "Noto Serif SC",
@@ -34,6 +39,34 @@
 
   --nav-h: 64px;
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  color-scheme: light;
+}
+
+/* 深色主题 —— 由 JS 在 <html> 上切换 data-theme，
+   仅覆盖颜色类变量，版式与字体保持不变 */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* 纸张与墨色（反转：深底浅字，保留暖调） */
+  --paper: #191816;
+  --paper-2: #211f1c;
+  --paper-3: #2a2723;
+  --ink: #eae6df;
+  --ink-2: #b1aba2;
+  --ink-3: #7f7a72;
+
+  /* 线条 */
+  --line: rgba(234, 230, 223, 0.13);
+  --line-2: rgba(234, 230, 223, 0.24);
+
+  /* 砖红提亮一档，保证深底上的对比度 */
+  --accent: #d96a4a;
+  --accent-soft: rgba(217, 106, 74, 0.16);
+  --accent-line: rgba(217, 106, 74, 0.38);
+
+  --nav-bg: rgba(25, 24, 22, 0.82);
+  --nav-bg-scrolled: rgba(25, 24, 22, 0.94);
 }
 
 *,
@@ -59,6 +92,7 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
+  transition: background-color 0.3s var(--ease), color 0.3s var(--ease);
 }
 
 h1,

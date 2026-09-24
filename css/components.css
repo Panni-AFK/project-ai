@@ -11,7 +11,7 @@
   height: var(--nav-h);
   display: flex;
   align-items: center;
-  background: rgba(250, 249, 246, 0.82);
+  background: var(--nav-bg);
   backdrop-filter: saturate(180%) blur(14px);
   -webkit-backdrop-filter: saturate(180%) blur(14px);
   border-bottom: 1px solid transparent;
@@ -20,7 +20,7 @@
 
 .nav.is-scrolled {
   border-bottom-color: var(--line);
-  background: rgba(250, 249, 246, 0.94);
+  background: var(--nav-bg-scrolled);
 }
 
 .nav-wrap {
@@ -65,6 +65,9 @@
   display: flex;
   align-items: center;
   gap: clamp(18px, 2.4vw, 34px);
+  /* 吸收剩余空间，保持「品牌居左、链接靠右」的原有布局，
+     新增的主题按钮则贴在导航最右侧 */
+  margin-left: auto;
 }
 
 .nav-links a {
@@ -103,6 +106,37 @@
   font-size: 0.62rem;
   color: var(--ink-3);
   margin-right: 6px;
+}
+
+/* 主题切换按钮 —— 与站内描边组件同一形制，浅色显示月亮、深色显示太阳 */
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex: none;
+  color: var(--ink-2);
+  border: 1px solid var(--line-2);
+  transition: border-color 0.25s var(--ease), color 0.25s var(--ease);
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.theme-toggle .icon-sun {
+  display: none;
+}
+
+:root[data-theme="dark"] .theme-toggle .icon-moon {
+  display: none;
+}
+
+:root[data-theme="dark"] .theme-toggle .icon-sun {
+  display: block;
 }
 
 .nav-toggle {
@@ -221,6 +255,12 @@
 @media (max-width: 860px) {
   .nav-toggle {
     display: block;
+  }
+
+  /* 抽屉式导航脱离文档流，由主题按钮吸收剩余空间，
+     让「主题 + 汉堡」贴右侧 */
+  .theme-toggle {
+    margin-left: auto;
   }
 
   .brand-sub {

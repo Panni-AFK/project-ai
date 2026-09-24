@@ -1,10 +1,70 @@
 /* ==========================================================================
    main.js — 页面交互
-   包含：移动端导航、导航滚动状态与当前位置高亮、滚动渐显、回到顶部、页脚年份
+   包含：浅色/深色主题切换、移动端导航、导航滚动状态与当前位置高亮、
+   滚动渐显、回到顶部、页脚年份
    ========================================================================== */
 
 (function () {
   "use strict";
+
+  /* ---------- 浅色 / 深色主题 -------------------------------------------- */
+
+  var THEME_KEY = "portfolio-theme";
+  var THEME_META_COLOR = { light: "#faf9f6", dark: "#191816" };
+
+  var root = document.documentElement;
+  var themeToggle = document.getElementById("theme-toggle");
+  var themeMeta = document.querySelector('meta[name="theme-color"]');
+
+  /* 把主题写到 <html data-theme> 上，CSS 变量完成全部换色 */
+  function applyTheme(theme) {
+    root.setAttribute("data-theme", theme);
+    if (themeMeta) {
+      themeMeta.setAttribute("content", THEME_META_COLOR[theme]);
+    }
+    if (themeToggle) {
+      themeToggle.setAttribute(
+        "aria-label",
+        theme === "dark" ? "切换到浅色主题" : "切换到深色主题"
+      );
+    }
+  }
+
+  /* 优先取用户上次的选择，其次跟随系统偏好，默认浅色 */
+  function initTheme() {
+    var stored = null;
+    try {
+      stored = localStorage.getItem(THEME_KEY);
+    } catch (e) {
+      /* 隐私模式等场景下 localStorage 不可用，忽略即可 */
+    }
+
+    var theme = "light";
+    if (stored === "dark" || stored === "light") {
+      theme = stored;
+    } else if (
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+    ) {
+      theme = "dark";
+    }
+    applyTheme(theme);
+  }
+
+  if (themeToggle) {
+    themeToggle.addEventListener("click", function () {
+      var next =
+        root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      applyTheme(next);
+      try {
+        localStorage.setItem(THEME_KEY, next);
+      } catch (e) {
+        /* 同上，写入失败不影响本次切换 */
+      }
+    });
+  }
+
+  initTheme();
 
   var nav = document.getElementById("nav");
   var toggle = document.getElementById("nav-toggle");
